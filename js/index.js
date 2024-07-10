@@ -7,7 +7,25 @@ const truncateName = (name, maxLength) => {
   return name.length > maxLength ? name.slice(0, maxLength - 3) + "..." : name;
 };
 
-const createProductCard = (product, label = "") => {
+const createTag = (tag, content, addClass) => {
+  let tagName = document.createElement(tag);
+  let tagContent = document.createTextNode(content);
+
+  if (addClass === "slides-price") {
+    content.includes("€")
+      ? (tagContent = document.createTextNode(checkTrailingZeros(content)))
+      : (tagContent = document.createTextNode(
+          "€" + checkTrailingZeros(content)
+        ));
+  }
+
+  tagName.appendChild(tagContent);
+  tagName.classList.add(addClass);
+
+  return tagName;
+};
+
+const createProductCard = (product, label = "", addClass) => {
   const card = document.createElement("div");
   card.classList.add("product-card");
 
@@ -93,8 +111,7 @@ fetch(endpoint, {
       carousel.appendChild(productCard);
     });
     $("#carousel").slick({
-      //??
-      infinite: false,
+      infinite: true,
       slidesToShow: 3,
       slidesToScroll: 2,
       variableWidth: true,
