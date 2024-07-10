@@ -30,19 +30,45 @@ const headers = {
     ),
 };
 
-// Define the endpoint
 const endpoint = "https://api.nosto.com/v1/graphql";
 
-// Make the fetch request
+// Fetch request
 fetch(endpoint, {
   method: "POST",
   headers: headers,
   body: query,
 })
   .then((response) => response.json())
-  .then((data) => {
-    console.log(JSON.stringify(data, null, 2)); // Pretty-print the JSON response
+  .then((response) => {
+    console.log(JSON.stringify(response, null, 2));
+    $("#carousel").slick({
+      infinite: true,
+      slidesToShow: 3,
+      slidesToScroll: 2,
+      variableWidth: true,
+      draggable: false,
+      responsive: [
+        {
+          breakpoint: 955,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 1,
+            arrows: false,
+            draggable: true,
+          },
+        },
+      ],
+    });
   })
   .catch((error) => {
     console.error("Error fetching data:", error);
   });
+
+const checkTrailingZeros = (price) => {
+  const formattedPrice = parceFloat(price).toString();
+  return formattedPrice;
+};
+
+const truncateName = (name, maxLength) => {
+  return name.length > maxLength ? name.slice(0, maxLength - 3) + "..." : name;
+};
