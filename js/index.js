@@ -1,30 +1,32 @@
-const checkTrailingZeros = (price) => {
-  return price.includes(".00") ? price.split(".00")[0] : price;
-};
-
+// TRUNCATE LONG PRODUCT NAMES
 const truncateName = (name, maxLength) => {
   return name.length > maxLength ? name.slice(0, maxLength - 3) + "..." : name;
 };
 
-const createTag = (tag, content, addClass) => {
-  let tagName = document.createElement(tag);
-  let tagContent = document.createTextNode(content);
-
-  if (addClass === "slides-price") {
-    content.includes("€")
-      ? (tagContent = document.createTextNode(checkTrailingZeros(content)))
-      : (tagContent = document.createTextNode(
-          "€" + checkTrailingZeros(content)
-        ));
-  }
-
-  tagName.appendChild(tagContent);
-  tagName.classList.add(addClass);
-
-  return tagName;
+// REMOVE TRAILING ZEROS
+const removeTrailingZeros = (price) => {
+  return price.includes(".00") ? price.split(".00")[0] : price;
 };
 
-const createProductCard = (product, label = "", addClass) => {
+// const createTag = (tag, content, addClass) => {
+//   let tagName = document.createElement(tag);
+//   let tagContent = document.createTextNode(content);
+
+//   if (addClass === "slides-price") {
+//     content.includes("€")
+//       ? (tagContent = document.createTextNode(checkTrailingZeros(content)))
+//       : (tagContent = document.createTextNode(
+//           "€" + checkTrailingZeros(content)
+//         ));
+//   }
+
+//   tagName.appendChild(tagContent);
+//   tagName.classList.add(addClass);
+
+//   return tagName;
+// };
+
+const createProductCard = (product, label = "") => {
   const card = document.createElement("div");
   card.classList.add("product-card");
 
@@ -32,6 +34,11 @@ const createProductCard = (product, label = "", addClass) => {
   image.src = product.imageUrl;
   image.alt = product.name;
   image.classList.add("product-image");
+
+  // ADD PRODUCT IMAGE CLICK EVENT
+  image.addEventListener("click", () => {
+    window.location.href = product.url;
+  });
 
   const brand = document.createElement("h3");
   brand.textContent = product.brand;
@@ -82,7 +89,7 @@ const query = `
   }
 `;
 
-// Set up the request headers
+// SETUP HEADERS
 const headers = {
   "Content-Type": "application/graphql",
   Authorization:
@@ -94,13 +101,16 @@ const headers = {
 
 const endpoint = "https://api.nosto.com/v1/graphql";
 
-// Fetch request
+// SETUP FETCH REQUEST
 fetch(endpoint, {
   method: "POST",
   headers: headers,
   body: query,
 })
   .then((response) => response.json())
+  //   .then((response) => {
+  //     console.log(JSON.stringify(response, null, 2));
+  //   })
   .then((response) => {
     const products = response.data.products.products.slice(0, 3);
 
