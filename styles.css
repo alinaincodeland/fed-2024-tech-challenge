@@ -1,0 +1,44 @@
+.main-container {
+  display: flex;
+  margin: 2rem;
+  padding: 1.5rem;
+  background-color: #dddddd;
+}
+
+.best-seller-container {
+  width: 33%;
+  margin-right: 20px;
+}
+
+.carousel-container {
+  width: 66%;
+  display: flex;
+  flex-direction: column;
+}
+
+.carousel-title,
+.product-brand {
+  text-transform: uppercase;
+}
+
+.carousel-title {
+  align-self: center;
+}
+
+.product-card {
+  margin-right: 1rem;
+  text-align: center;
+}
+
+.product-image {
+  width: 160px;
+  height: 160px;
+  margin-bottom: 1rem;
+}
+
+.product-brand,
+.product-name,
+.product-price {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}

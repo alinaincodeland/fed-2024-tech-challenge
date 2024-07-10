@@ -7,7 +7,7 @@ const truncateName = (name, maxLength) => {
   return name.length > maxLength ? name.slice(0, maxLength - 3) + "..." : name;
 };
 
-const createProductCard = (product) => {
+const createProductCard = (product, label = "") => {
   const card = document.createElement("div");
   card.classList.add("product-card");
 
@@ -16,21 +16,28 @@ const createProductCard = (product) => {
   image.alt = product.name;
   image.classList.add("product-image");
 
-  const name = document.createElement("h3");
-  name.textContent = product.name;
-  name.classList.add("product-name");
-
-  const brand = document.createElement("p");
+  const brand = document.createElement("h3");
   brand.textContent = product.brand;
   brand.classList.add("product-brand");
 
-  const price = document.createElement("p");
+  const name = document.createElement("p");
+  name.textContent = product.name;
+  name.classList.add("product-name");
+
+  const price = document.createElement("h3");
   price.textContent = `€${product.price}`;
   price.classList.add("product-price");
 
+  if (label) {
+    const labelElement = document.createElement("div");
+    labelElement.textContent = label;
+    labelElement.classList.add("best-seller-label");
+    card.appendChild(labelElement);
+  }
+
   card.appendChild(image);
-  card.appendChild(name);
   card.appendChild(brand);
+  card.appendChild(name);
   card.appendChild(price);
 
   return card;
@@ -78,7 +85,7 @@ fetch(endpoint, {
 })
   .then((response) => response.json())
   .then((response) => {
-    const products = response.data.products.products.slice(0, 3); // Get the first 3 products
+    const products = response.data.products.products.slice(0, 3);
 
     const carousel = document.getElementById("carousel");
     products.forEach((product) => {
