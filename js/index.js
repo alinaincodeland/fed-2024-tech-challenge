@@ -1,6 +1,5 @@
 const checkTrailingZeros = (price) => {
-  const formattedPrice = parceFloat(price).toString();
-  return formattedPrice;
+  return price.includes(".00") ? price.split(".00")[0] : price;
 };
 
 const truncateName = (name, maxLength) => {
