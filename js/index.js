@@ -93,7 +93,8 @@ fetch(endpoint, {
       carousel.appendChild(productCard);
     });
     $("#carousel").slick({
-      infinite: true,
+      //??
+      infinite: false,
       slidesToShow: 3,
       slidesToScroll: 2,
       variableWidth: true,

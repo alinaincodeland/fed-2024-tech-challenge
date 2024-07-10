@@ -10,6 +10,15 @@
   margin-right: 20px;
 }
 
+.best-seller-title {
+  color: white;
+  background-color: red;
+  padding-inline: 1.5rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  width: fit-content;
+}
+
 .carousel-container {
   width: 66%;
   display: flex;
@@ -17,7 +26,8 @@
 }
 
 .carousel-title,
-.product-brand {
+.product-brand,
+.best-seller-title {
   text-transform: uppercase;
 }
 
