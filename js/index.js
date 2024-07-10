@@ -1,3 +1,12 @@
+const checkTrailingZeros = (price) => {
+  const formattedPrice = parceFloat(price).toString();
+  return formattedPrice;
+};
+
+const truncateName = (name, maxLength) => {
+  return name.length > maxLength ? name.slice(0, maxLength - 3) + "..." : name;
+};
+
 const query = `
   query {
     products(limit: 50) {
@@ -63,12 +72,3 @@ fetch(endpoint, {
   .catch((error) => {
     console.error("Error fetching data:", error);
   });
-
-const checkTrailingZeros = (price) => {
-  const formattedPrice = parceFloat(price).toString();
-  return formattedPrice;
-};
-
-const truncateName = (name, maxLength) => {
-  return name.length > maxLength ? name.slice(0, maxLength - 3) + "..." : name;
-};
