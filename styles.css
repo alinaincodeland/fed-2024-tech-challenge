@@ -35,7 +35,8 @@
 
 .carousel-title,
 .product-brand,
-.best-seller-title {
+.best-seller-title,
+.most-viewed {
   text-transform: uppercase;
 }
 
@@ -59,6 +60,16 @@
 .product-price {
   margin-top: 0;
   margin-bottom: 0.5rem;
+}
+
+.most-viewed {
+  background-color: #facc02;
+  padding-top: 0.3rem;
+  padding-bottom: 0.3rem;
+  padding-inline: 0.7rem;
+  position: absolute;
+  top: -17px;
+  left: 605px;
 }
 
 /* MOBILE VIEW */

@@ -8,25 +8,11 @@ const removeTrailingZeros = (price) => {
   return price.includes(".00") ? price.split(".00")[0] : price;
 };
 
-// const createTag = (tag, content, addClass) => {
-//   let tagName = document.createElement(tag);
-//   let tagContent = document.createTextNode(content);
-
-//   if (addClass === "slides-price") {
-//     content.includes("€")
-//       ? (tagContent = document.createTextNode(checkTrailingZeros(content)))
-//       : (tagContent = document.createTextNode(
-//           "€" + checkTrailingZeros(content)
-//         ));
-//   }
-
-//   tagName.appendChild(tagContent);
-//   tagName.classList.add(addClass);
-
-//   return tagName;
-// };
-
-const createProductCard = (product, label = "") => {
+const createProductCard = (
+  product,
+  isMostViewed = false,
+  isBestSeller = false
+) => {
   const card = document.createElement("div");
   card.classList.add("product-card");
 
@@ -40,29 +26,32 @@ const createProductCard = (product, label = "") => {
     window.location.href = product.url;
   });
 
-  const brand = document.createElement("h3");
-  brand.textContent = product.brand;
-  brand.classList.add("product-brand");
-
-  const name = document.createElement("p");
-  name.textContent = product.name;
-  name.classList.add("product-name");
-
-  const price = document.createElement("h3");
-  price.textContent = `€${product.price}`;
-  price.classList.add("product-price");
-
-  if (label) {
-    const labelElement = document.createElement("div");
-    labelElement.textContent = label;
-    labelElement.classList.add("best-seller-label");
-    card.appendChild(labelElement);
+  if (isMostViewed) {
+    const mostViewed = document.createElement("h5");
+    mostViewed.textContent = "Most Viewed!";
+    mostViewed.classList.add("most-viewed");
+    card.appendChild(mostViewed);
   }
 
   card.appendChild(image);
-  card.appendChild(brand);
-  card.appendChild(name);
-  card.appendChild(price);
+
+  if (!isBestSeller) {
+    const brand = document.createElement("h3");
+    brand.textContent = product.brand;
+    brand.classList.add("product-brand");
+
+    const name = document.createElement("p");
+    name.textContent = product.name;
+    name.classList.add("product-name");
+
+    const price = document.createElement("h3");
+    price.textContent = `€${product.price}`;
+    price.classList.add("product-price");
+
+    card.appendChild(brand);
+    card.appendChild(name);
+    card.appendChild(price);
+  }
 
   return card;
 };
@@ -108,17 +97,54 @@ fetch(endpoint, {
   body: query,
 })
   .then((response) => response.json())
-  //   .then((response) => {
-  //     console.log(JSON.stringify(response, null, 2));
-  //   })
   .then((response) => {
-    const products = response.data.products.products.slice(0, 3);
+    const products = response.data.products.products;
+
+    let mostViewedProduct = null;
+    let bestSellerProduct = null;
+    let maxViews = 0;
+    let maxBuys = 0;
+
+    products.forEach((product) => {
+      if (product.scores.week.views > maxViews) {
+        maxViews = product.scores.week.views;
+        mostViewedProduct = product;
+      }
+      if (product.scores.week.buys > maxBuys) {
+        maxBuys = product.scores.week.buys;
+        bestSellerProduct = product;
+      }
+    });
+
+    // Add most viewed product to the beginning of the carousel
+    products.splice(products.indexOf(mostViewedProduct), 1);
+    products.unshift(mostViewedProduct);
+
+    // DISPLAY BEST SELLER THIS WEEK
+    if (bestSellerProduct) {
+      const isMostViewed = bestSellerProduct === mostViewedProduct;
+
+      const bestSellerCard = createProductCard(
+        bestSellerProduct,
+        isMostViewed,
+        true
+      );
+      document.getElementById("best-seller").appendChild(bestSellerCard);
+    }
+
+    // DISPLAY CAROUSEL
+    const carouselProducts = products.filter(
+      (product) => product !== bestSellerProduct
+    );
 
     const carousel = document.getElementById("carousel");
-    products.forEach((product) => {
-      const productCard = createProductCard(product);
+
+    carouselProducts.forEach((product) => {
+      const isMostViewed = product === mostViewedProduct;
+      const productCard = createProductCard(product, isMostViewed, false);
       carousel.appendChild(productCard);
     });
+
     $("#carousel").slick({
       infinite: true,
       slidesToShow: 3,
