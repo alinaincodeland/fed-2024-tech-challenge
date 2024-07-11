@@ -28,7 +28,8 @@
 }
 
 .carousel-container {
-  width: 35rem;
+  width: 33rem;
+  margin-inline: 2rem;
   display: flex;
   flex-direction: column;
 }
