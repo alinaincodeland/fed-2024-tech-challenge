@@ -1,5 +1,9 @@
 ## FED Tech Challenge 2024
 
+This repo contains the solution for a technical challenge provided by [Nosto](https://www.nosto.com/) for the Frontend Engineering position.
+
+The main objective of the challenge is fetching data from a Nosto API and display is using JavaScript, HTML, CSS, jQuery and slick or other carousel frameworks.
+
 ### Running the project
 
 - Clone the repository
@@ -14,12 +18,12 @@
 - JavaScript
 - HTML
 - CSS
-- slick carousel
-- jQuery
+- [slick carousel](<(https://kenwheeler.github.io/slick/)>)
+- [jQuery](https://jquery.com/)
 
 ### A little about myself
 
-Hey there, I'm Alina. I like to think of myself as a creative developer, and I am looking forward to become a part of the Nosto team! And yes, you guessed it—I'm also a big fan of Friends and gifs!
+Hey there, I'm Alina. I like to think of myself as a creative developer, and I am looking forward to become a part of the Nosto team! And yes, you guessed it - I'm also a big fan of Friends and gifs!
 
 ![Phoebs](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExY3R4M3A4MG9sNTFjM3ZueWYwZHZmbzlnejdiNnR2b3prcHNwbWw1ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/QBGfW8HqzXzYDojCqo/giphy.gif)
 
