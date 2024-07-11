@@ -1,13 +1,14 @@
-// TRUNCATE LONG PRODUCT NAMES
+// Truncate long product names
 const truncateName = (name, maxLength) => {
   return name.length > maxLength ? name.slice(0, maxLength - 3) + "..." : name;
 };
 
-// REMOVE TRAILING ZEROS
+// Remove trailing zeroes
 const removeTrailingZeros = (price) => {
   return price.includes(".00") ? price.split(".00")[0] : price;
 };
 
+// Create product card
 const createProductCard = (
   product,
   isMostViewed = false,
@@ -21,7 +22,7 @@ const createProductCard = (
   image.alt = product.name;
   image.classList.add("product-image");
 
-  // ADD PRODUCT IMAGE CLICK EVENT
+  // Add product image click event
   image.addEventListener("click", () => {
     window.location.href = product.url;
   });
@@ -78,7 +79,7 @@ const query = `
   }
 `;
 
-// SETUP HEADERS
+// Setup headers
 const headers = {
   "Content-Type": "application/graphql",
   Authorization:
@@ -90,7 +91,7 @@ const headers = {
 
 const endpoint = "https://api.nosto.com/v1/graphql";
 
-// SETUP FETCH REQUEST
+// Setup fetch request
 fetch(endpoint, {
   method: "POST",
   headers: headers,
@@ -120,7 +121,7 @@ fetch(endpoint, {
     products.splice(products.indexOf(mostViewedProduct), 1);
     products.unshift(mostViewedProduct);
 
-    // DISPLAY BEST SELLER THIS WEEK
+    // Display best seller this week
     if (bestSellerProduct) {
       const isMostViewed = bestSellerProduct === mostViewedProduct;
 
@@ -132,7 +133,7 @@ fetch(endpoint, {
       document.getElementById("best-seller").appendChild(bestSellerCard);
     }
 
-    // DISPLAY CAROUSEL
+    // Display carousel
     const carouselProducts = products.filter(
       (product) => product !== bestSellerProduct
     );
