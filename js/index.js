@@ -27,19 +27,24 @@ const createProductCard = (
     window.location.href = product.url;
   });
 
-  image.addEventListener("mouseover", () => {
-    if (product.alternateImageUrls.length > 0) {
-      const hoverImage = document.createElement("img");
-      hoverImage.src = product.alternateImageUrls[0];
-      hoverImage.classList.add("hover-image");
-      card.appendChild(hoverImage);
-    }
-  });
-
-  image.addEventListener("mouseout", () => {
+  if (product.alternateImageUrls.length > 0) {
     const hoverImage = document.createElement("img");
-    card.removeChild(hoverImage);
-  });
+    hoverImage.src = product.alternateImageUrls[0];
+    hoverImage.alt = product.name;
+    hoverImage.classList.add("product-image");
+    hoverImage.classList.add("hidden");
+
+    card.appendChild(hoverImage);
+
+    image.addEventListener("mouseover", () => {
+      image.classList.add("hidden");
+      hoverImage.classList.remove("hidden");
+    });
+    hoverImage.addEventListener("mouseout", () => {
+      image.classList.remove("hidden");
+      hoverImage.classList.add("hidden");
+    });
+  }
 
   if (isMostViewed) {
     const mostViewed = document.createElement("h5");

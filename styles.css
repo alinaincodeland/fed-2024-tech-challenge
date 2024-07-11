@@ -45,6 +45,11 @@
   align-self: center;
 }
 
+.slick-slide img.hidden {
+  display: none;
+  transition: 0.2s;
+}
+
 .product-card {
   margin-right: 1rem;
   text-align: center;
