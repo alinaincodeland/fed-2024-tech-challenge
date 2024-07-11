@@ -36,6 +36,7 @@ const createProductCard = (
 
     card.appendChild(hoverImage);
 
+    // Display alternate image on hover
     image.addEventListener("mouseover", () => {
       image.classList.add("hidden");
       hoverImage.classList.remove("hidden");
