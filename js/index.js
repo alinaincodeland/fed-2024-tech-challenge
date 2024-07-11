@@ -27,6 +27,20 @@ const createProductCard = (
     window.location.href = product.url;
   });
 
+  image.addEventListener("mouseover", () => {
+    if (product.alternateImageUrls.length > 0) {
+      const hoverImage = document.createElement("img");
+      hoverImage.src = product.alternateImageUrls[0];
+      hoverImage.classList.add("hover-image");
+      card.appendChild(hoverImage);
+    }
+  });
+
+  image.addEventListener("mouseout", () => {
+    const hoverImage = document.createElement("img");
+    card.removeChild(hoverImage);
+  });
+
   if (isMostViewed) {
     const mostViewed = document.createElement("h5");
     mostViewed.textContent = "Most Viewed!";
