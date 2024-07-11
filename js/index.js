@@ -118,9 +118,6 @@ fetch(endpoint, {
   body: query,
 })
   .then((response) => response.json())
-  // .then((data) => {
-  //   console.log(JSON.stringify(data, null, 2));
-  // })
   .then((response) => {
     const products = response.data.products.products;
 
