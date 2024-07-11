@@ -49,6 +49,11 @@ Naturally, the project was crafted with a lot of google search. While I'm quite 
 
 ### Screenshots
 
-- Small (min. 600px)
+- Desktop view
 
-- Medium and large
+![Screenshot 2024-07-11 at 19 38 57](https://github.com/alinaincodeland/fed-2024-tech-challenge/assets/95931865/ceb642f5-c4a3-4719-aee7-dda783971b61)
+
+- Mobile view (max-width: 600px)
+
+![Screenshot 2024-07-11 at 19 39 21](https://github.com/alinaincodeland/fed-2024-tech-challenge/assets/95931865/61a0e4ff-9e50-4a29-873b-9009b59058d7)
+
