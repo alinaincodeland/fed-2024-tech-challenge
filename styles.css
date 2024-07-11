@@ -9,8 +9,8 @@
 }
 
 .best-seller-container {
-  width: 20rem;
-  height: 20rem;
+  width: 18rem;
+  height: 18rem;
   margin-right: 2rem;
   background-color: white;
   display: flex;
@@ -68,8 +68,9 @@
   padding-bottom: 0.3rem;
   padding-inline: 0.7rem;
   position: absolute;
-  top: -17px;
-  left: 653px;
+  top: 152px;
+  left: 400px;
+  z-index: 2;
 }
 
 /* MOBILE VIEW */

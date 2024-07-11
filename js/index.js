@@ -42,7 +42,7 @@ const createProductCard = (
     brand.classList.add("product-brand");
 
     const name = document.createElement("p");
-    name.textContent = product.name;
+    name.textContent = truncateName(product.name, 20);
     name.classList.add("product-name");
 
     const price = document.createElement("h3");
@@ -98,6 +98,9 @@ fetch(endpoint, {
   body: query,
 })
   .then((response) => response.json())
+  // .then((data) => {
+  //   console.log(JSON.stringify(data, null, 2));
+  // })
   .then((response) => {
     const products = response.data.products.products;
 
